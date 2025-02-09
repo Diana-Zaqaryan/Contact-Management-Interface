@@ -1,0 +1,32 @@
+:root {
+
+  --balck : #101922;
+  --green : #576d7a;
+  --light-green: #7c8f9d;
+  --grey: #959da9;
+  --pink: #c0afbf;
+  --white: #f3eef1;
+  --blue: #446ca9
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

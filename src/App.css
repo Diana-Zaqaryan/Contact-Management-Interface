@@ -1,0 +1,64 @@
+#root {
+  max-width: 1280px;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+main {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 50px auto;
+}
+
+header {
+  color: var(--grey);
+  font-size: 4.5em;
+  font-weight: bolder;
+  margin-top: 50px;
+}
+
+aside {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: scroll;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+  padding: 10px;
+  position: relative;
+  height: 700px;
+
+}
+
+section {
+  width: 60%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+  height: 700px;
+
+}
+
+
+.welcome_page {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 8em;
+  h1 {
+    font-size: 2.5em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--green);
+    margin-bottom: 1.5em;
+  }
+  p{
+    font-size: 1.2em;
+    margin-bottom: 1em;
+
+  }
+}
