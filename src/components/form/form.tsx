@@ -201,11 +201,8 @@ function Form({handleSelectContact, data, contact}: AddFormProps) {
                 )}
             />
 
-            {imagePreview && <img src={imagePreview}
-                                  onError={(e) => {
-                                      e.target.src = profileImage;
-                                  }
-                                  } alt="loading image" style={{width: '130px'}}/>}
+            {imagePreview && <img src={imagePreview} onError={(e) => {e.target.src = profileImage;}}
+                                  alt="loading image" style={{width: '130px'}}/>}
 
             <form.Field
                 name="image"
@@ -221,12 +218,6 @@ function Form({handleSelectContact, data, contact}: AddFormProps) {
                                     const url = URL.createObjectURL(file);
                                     field.handleChange(url);
                                     setImagePreview(url);
-                                } else {
-                                    field.handleChange(profileImage);
-                                    setImagePreview(profileImage);
-                                }
-                                if (!field.state.isDirty) {
-                                    field.handleChange(field.state.value);
                                 }
                             }}
                             onBlur={field.handleBlur}
