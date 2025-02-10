@@ -1,4 +1,4 @@
-import './App.css'
+import './App.css';
 import MainContent from "./components/main/main-content";
 import {Contact} from "./types/type";
 import Contacts from "./components/conatcts";
@@ -6,46 +6,30 @@ import useContact from "./hooks/useContact";
 import {useEffect, useState} from "react";
 import Form from "./components/form/form.tsx";
 import Detail from "./components/detail/detail";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-
+import {Route, Routes, useNavigate} from "react-router-dom";
 
 function App() {
-
-
     const {data, isLoading, error} = useContact();
-    const [selectedContactId, setSelectedContactId] = useState<string>('')
+    const [selectedContactId, setSelectedContactId] = useState<string>('');
     const [editingContact, setEditingContact] = useState<Contact | null>(null);
 
-
+    const navigate = useNavigate();
     useEffect(() => {
-        const savedContactId = localStorage.getItem('selectedContactId');
-        if (savedContactId) {
-            setSelectedContactId(savedContactId);
-        }
+        navigate('/');
     }, []);
 
-    useEffect(() => {
-        if (selectedContactId !== null) {
-            localStorage.setItem('selectedContactId', selectedContactId.toString());
-        } else {
-            localStorage.removeItem('selectedContactId');
-        }
-    }, [selectedContactId]);
 
     function handleSelectedContact(id: string): void {
-        setSelectedContactId(id)
+        setSelectedContactId(id);
     }
 
     function resetSelectedContactId(): void {
-        localStorage.removeItem('selectedContactId');
-        localStorage.removeItem('currentContact');
-        setEditingContact(null)
+        setEditingContact(null);
         setSelectedContactId('');
     }
 
-
     function handleEditedContact(data: Contact) {
-        setEditingContact(data)
+        setEditingContact(data);
     }
 
     function WelcomePage() {
@@ -61,11 +45,11 @@ function App() {
                     </p>
                 </div>
             </>
-        )
+        );
     }
 
     return (
-        <BrowserRouter>
+        <>
             <header>
                 Contact Management Interface
             </header>
@@ -76,7 +60,7 @@ function App() {
                         error={error}
                         selectedContactId={selectedContactId}
                         isLoading={isLoading}
-                        data ={data}
+                        data={data}
                         handleSelectedContact={handleSelectedContact}
                         resetSelectedContactId={resetSelectedContactId}
                     />
@@ -85,14 +69,15 @@ function App() {
                 <section>
                     <MainContent>
                         <Routes>
-                            <Route path="*"  element={<WelcomePage />} />
-                            <Route path="/" element={<WelcomePage />}/>
+                            <Route path="*" element={<WelcomePage />} />
+                            <Route path="/" element={<WelcomePage />} />
                             <Route
                                 path={'createNew'}
                                 element={
                                     <Form
                                         data={data}
-                                        handleSelectContact={handleSelectedContact}/>}
+                                        handleSelectContact={handleSelectedContact}
+                                    />}
                             />
                             <Route path={'contacts/:id'}
                                    element={<Detail
@@ -109,8 +94,8 @@ function App() {
                     </MainContent>
                 </section>
             </main>
-        </BrowserRouter>
-    )
+        </>
+    );
 }
 
-export default App
+export default App;
