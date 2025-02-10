@@ -30,23 +30,31 @@ function Form({handleSelectContact, data, contact}: AddFormProps) {
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     let lastIndex: string | number = data.length ? (data as Contact[]).sort((a: Contact, b: Contact) => +b.id - +a.id)[0].id : 1
 
+    if (contact) {
+        localStorage.setItem('currentContact', JSON.stringify(contact))
+    }
+    const currentContact: Contact = JSON.parse(localStorage.getItem('currentContact'))
+
 
     useEffect(() => {
         if (contact?.image) {
             setImagePreview(contact.image);
-        } else {
+        } else if(currentContact?.image) {
+            setImagePreview(currentContact?.image);
+        }
+        else {
             setImagePreview(profileImage)
         }
-    }, [contact]);
+    }, [contact, currentContact?.image]);
 
     const form = useForm({
 
         defaultValues: {
-            name: contact?.name || '',
-            lastName: contact?.lastName || '',
-            userName: contact?.userName || '',
-            info: contact?.info || '',
-            image: contact?.image || profileImage,
+            name: currentContact?.name || '',
+            lastName: currentContact?.lastName || '',
+            userName: currentContact?.userName || '',
+            info: currentContact?.info || '',
+            image: currentContact?.image || profileImage,
         },
         onSubmit(value: { value: Contact | Omit<Contact, 'id'> }) {
             try {
@@ -92,8 +100,6 @@ function Form({handleSelectContact, data, contact}: AddFormProps) {
         validatorAdapter: zodValidator(),
     });
 
-    console.log(contact)
-
     return (
         <form
             className={styles.form}
@@ -103,7 +109,7 @@ function Form({handleSelectContact, data, contact}: AddFormProps) {
                 form.handleSubmit();
             }}
         >
-            <h2 className={styles.title}>{contact ? 'Edit' : 'Add'} Contact</h2>
+            <h2 className={styles.title}>{(contact || currentContact) ? 'Edit' : 'Add'} Contact</h2>
 
             <form.Field
                 name="name"
