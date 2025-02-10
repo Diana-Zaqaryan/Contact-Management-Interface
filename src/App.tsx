@@ -37,8 +37,10 @@ function App() {
     }
 
     function resetSelectedContactId(): void {
-        setSelectedContactId('');
         localStorage.removeItem('selectedContactId');
+        localStorage.removeItem('currentContact');
+        setEditingContact(null)
+        setSelectedContactId('');
     }
 
 
