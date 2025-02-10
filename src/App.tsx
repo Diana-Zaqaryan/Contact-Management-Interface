@@ -16,7 +16,7 @@ function App() {
     const navigate = useNavigate();
     useEffect(() => {
         navigate('/');
-    }, []);
+    },[]);
 
 
     function handleSelectedContact(id: string): void {
